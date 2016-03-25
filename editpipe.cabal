@@ -16,7 +16,7 @@ executable editpipe
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
+  build-depends:       base >= 4 && < 5
                      , optparse-applicative >= 0.12
                      , temporary >= 1.2
                      , process
