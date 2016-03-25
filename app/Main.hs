@@ -1,7 +1,7 @@
 module Main where
 
-import Control.Monad (void)
 import Control.Applicative ((<|>))
+import Control.Monad (void)
 import Data.Maybe (fromMaybe)
 import Data.Monoid ((<>))
 import Options.Applicative
@@ -32,7 +32,7 @@ getEditor = choose <$> getEnv "EDITOR" <*> getEnv "VISUAL"
 
 toTemp :: Handle -> IO ()
 toTemp h = do
-  c <- hGetContents stdin
+  c <- getContents
   hPutStr h c
   hFlush h
   hSeek h AbsoluteSeek 0
