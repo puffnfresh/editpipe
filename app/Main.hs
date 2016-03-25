@@ -1,8 +1,9 @@
 module Main where
 
 import Control.Monad (void)
+import Control.Applicative ((<|>))
 import Data.Maybe (fromMaybe)
-import Data.Monoid (First(..), (<>))
+import Data.Monoid ((<>))
 import Options.Applicative
 import System.IO
 import System.IO.Temp (withSystemTempFile)
@@ -27,7 +28,7 @@ withTTY cp = do
 
 getEditor :: IO String
 getEditor = choose <$> getEnv "EDITOR" <*> getEnv "VISUAL"
-  where choose a b = fromMaybe "nano" . getFirst $ foldMap First [a, b]
+  where choose a b = fromMaybe "nano" $ a <|> b
 
 toTemp :: Handle -> IO ()
 toTemp h = do
