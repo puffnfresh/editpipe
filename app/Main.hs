@@ -1,9 +1,7 @@
 module Main where
 
-import Control.Applicative ((<|>))
 import Control.Monad (void)
 import Data.Maybe (fromMaybe)
-import Data.Monoid ((<>))
 import Options.Applicative
 import System.IO
 import System.IO.Temp (withSystemTempFile)
@@ -22,7 +20,7 @@ withTTY cp = do
   stdin' <- openFile "/dev/tty" ReadMode
   stdout' <- openFile "/dev/tty" WriteMode
   (_, _, _, p) <- createProcess cp { std_in = UseHandle stdin', std_out = UseHandle stdout' }
-  waitForProcess p
+  void $ waitForProcess p
   hClose stdin'
   hClose stdout'
 
